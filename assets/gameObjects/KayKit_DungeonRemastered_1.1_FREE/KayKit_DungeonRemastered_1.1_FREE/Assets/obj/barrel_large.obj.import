@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://6fgp18tgavhi"
+path="res://.godot/imported/barrel_large.obj-810b4980ff08e0f8882b11b8035ecfaf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/barrel_large.obj-810b4980ff08e0f8882b11b8035ecfaf.mesh"]
+
+source_file="res://assets/gameObjects/KayKit_DungeonRemastered_1.1_FREE/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/barrel_large.obj"
+dest_files=["res://.godot/imported/barrel_large.obj-810b4980ff08e0f8882b11b8035ecfaf.mesh", "res://.godot/imported/barrel_large.obj-810b4980ff08e0f8882b11b8035ecfaf.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

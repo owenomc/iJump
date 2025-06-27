@@ -1,0 +1,111 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbdepwyyjqlcm"]
+
+[ext_resource type="Script" uid="uid://ckvpajwmrsvb3" path="res://Levels/home.gd" id="1_afbh3"]
+[ext_resource type="FontFile" uid="uid://csg47slel6g8v" path="res://fonts/04B_30__.TTF" id="2_lk8wr"]
+[ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://Themes/text.tres" id="3_fjs5f"]
+[ext_resource type="StyleBox" uid="uid://0mthtc2t6wh4" path="res://assets/black.tres" id="4_wc6jh"]
+[ext_resource type="AudioStream" uid="uid://dio810bhwrysi" path="res://assets/waterFlow.mp3" id="5_lk8wr"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_afbh3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -236.5
+offset_top = 245.6
+offset_right = 236.5
+offset_bottom = 366.6
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_lk8wr")
+theme_override_font_sizes/font_size = 120
+text = "iJump"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -64.0
+offset_right = 35.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_fjs5f")
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = ExtResource("4_wc6jh")
+theme_override_styles/disabled_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/disabled = ExtResource("4_wc6jh")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/hover_pressed = ExtResource("4_wc6jh")
+theme_override_styles/hover_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/hover = ExtResource("4_wc6jh")
+theme_override_styles/pressed_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/pressed = ExtResource("4_wc6jh")
+theme_override_styles/normal_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/normal = ExtResource("4_wc6jh")
+text = "Play"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_fjs5f")
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = ExtResource("4_wc6jh")
+theme_override_styles/disabled_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/disabled = ExtResource("4_wc6jh")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/hover_pressed = ExtResource("4_wc6jh")
+theme_override_styles/hover_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/hover = ExtResource("4_wc6jh")
+theme_override_styles/pressed_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/pressed = ExtResource("4_wc6jh")
+theme_override_styles/normal_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/normal = ExtResource("4_wc6jh")
+text = "Settings"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_fjs5f")
+theme_override_styles/focus = ExtResource("4_wc6jh")
+theme_override_styles/disabled_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/disabled = ExtResource("4_wc6jh")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/hover_pressed = ExtResource("4_wc6jh")
+theme_override_styles/hover_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/hover = ExtResource("4_wc6jh")
+theme_override_styles/pressed_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/pressed = ExtResource("4_wc6jh")
+theme_override_styles/normal_mirrored = ExtResource("4_wc6jh")
+theme_override_styles/normal = ExtResource("4_wc6jh")
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lk8wr")
+volume_db = -10.0
+parameters/looping = true
+
+[connection signal="focus_entered" from="VBoxContainer/Button1" to="." method="_on_button_1_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/Button1" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

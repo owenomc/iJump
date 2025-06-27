@@ -1,0 +1,66 @@
+[gd_scene load_steps=14 format=3 uid="uid://dufxl8kkrutuy"]
+
+[ext_resource type="Script" uid="uid://ckyy2xjt0067d" path="res://player/player.gd" id="1_5qrx2"]
+[ext_resource type="Texture2D" uid="uid://co5hwj8yr7bsw" path="res://player/animations/Attack_1.png" id="2_b32pr"]
+[ext_resource type="Texture2D" uid="uid://14w8jygxnlte" path="res://player/animations/Attack_2.png" id="3_hbkom"]
+[ext_resource type="Texture2D" uid="uid://y37y7v4ki67m" path="res://player/animations/Attack_3.png" id="4_d4g0h"]
+[ext_resource type="Texture2D" uid="uid://b0g7jaujbnuoh" path="res://player/animations/Dead.png" id="5_v4f8b"]
+[ext_resource type="Texture2D" uid="uid://c3q3180j5hj14" path="res://player/animations/Hurt.png" id="6_t8epa"]
+[ext_resource type="Texture2D" uid="uid://eor8in4iev4n" path="res://player/animations/Idle.png" id="7_w24id"]
+[ext_resource type="Texture2D" uid="uid://o038vjnn2rp7" path="res://player/animations/Jump.png" id="8_uewl2"]
+[ext_resource type="Texture2D" uid="uid://cxi2sm35liuvw" path="res://player/animations/Run.png" id="9_ofhxi"]
+[ext_resource type="Texture2D" uid="uid://cwd06x0mp55my" path="res://player/animations/Shield.png" id="10_yu5hk"]
+[ext_resource type="Texture2D" uid="uid://fcghfikd17l4" path="res://player/animations/Walk.png" id="11_q6miu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2m0d2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mlfor"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b32pr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hbkom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d4g0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v4f8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t8epa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w24id")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uewl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ofhxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yu5hk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_q6miu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_5qrx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(387, 446)
+shape = SubResource("CapsuleShape2D_2m0d2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(387, 446)
+sprite_frames = SubResource("SpriteFrames_mlfor")
+
+[node name="Camera2D" type="Camera2D" parent="."]

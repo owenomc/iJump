@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm8ctnojcqo02"]
+
+[ext_resource type="PackedScene" uid="uid://201dt1njvo7k" path="res://assets/gameObjects/KayKit_Skeletons_1.0_FREE/KayKit_Skeletons_1.0_FREE/characters/gltf/Skeleton_Rogue.glb" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://dbrbjvdtmr5a1" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="3_qjkh3"]
+[ext_resource type="StyleBox" uid="uid://0mthtc2t6wh4" path="res://assets/color/black.tres" id="4_g6k8r"]
+[ext_resource type="StyleBox" uid="uid://bq3d372ksniqd" path="res://assets/color/blue.tres" id="5_boad6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkbax"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_rkbax")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rkbax")
+
+[node name="Skeleton_Rogue" parent="." instance=ExtResource("1_oul6g")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+spring_length = 4.5
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Space1" type="Control" parent="PlayerUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="JumpChargeBar" type="ProgressBar" parent="PlayerUI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_qjkh3")
+theme_override_styles/background = ExtResource("4_g6k8r")
+theme_override_styles/fill = ExtResource("5_boad6")
+max_value = 0.8
+
+[node name="Space2" type="Control" parent="PlayerUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3

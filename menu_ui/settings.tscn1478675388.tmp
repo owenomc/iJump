@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3 uid="uid://fsx5rawuplg7"]
+
+[ext_resource type="Script" uid="uid://2xh21xbmx45i" path="res://menu_ui/settings.gd" id="1"]
+[ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="2_tvpij"]
+[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/Mixkit/mixkit-cool-interface-click-tone-2568.wav" id="3_fe80l"]
+[ext_resource type="StyleBox" uid="uid://bq3d372ksniqd" path="res://assets/color/blue.tres" id="3_sy4xk"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tvpij")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -521.0
+offset_top = -391.0
+offset_right = 521.0
+offset_bottom = 391.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Header"
+theme_override_font_sizes/font_size = 125
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AudioVolumeRow" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/VBoxContainer2/AudioVolumeRow"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="Control/MarginContainer/VBoxContainer/VBoxContainer2/AudioVolumeRow"]
+layout_mode = 2
+value = 50.0
+
+[node name="FullscreenRow" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FullscreenLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/FullscreenRow"]
+layout_mode = 2
+text = "Fullscreen:"
+
+[node name="FullscreenDropdown" type="OptionButton" parent="Control/MarginContainer/VBoxContainer/FullscreenRow"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sy4xk")
+
+[node name="VSyncRow" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSyncLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/VSyncRow"]
+layout_mode = 2
+text = "V-Sync:"
+
+[node name="VSyncDropdown" type="OptionButton" parent="Control/MarginContainer/VBoxContainer/VSyncRow"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sy4xk")
+
+[node name="FrameCapRow" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MaxFPSLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/FrameCapRow"]
+layout_mode = 2
+text = "Max FPS:"
+
+[node name="MaxFPSDropdown" type="OptionButton" parent="Control/MarginContainer/VBoxContainer/FrameCapRow"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sy4xk")
+
+[node name="ApplyButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sy4xk")
+text = "Apply"
+
+[node name="ResetButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sy4xk")
+text = "Reset to Default"
+
+[node name="BackButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sy4xk")
+text = "Back"
+
+[node name="button_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fe80l")
+
+[connection signal="item_selected" from="Control/MarginContainer/VBoxContainer/FullscreenRow/FullscreenDropdown" to="." method="_on_fullscreen_dropdown_item_selected"]
+[connection signal="item_selected" from="Control/MarginContainer/VBoxContainer/VSyncRow/VSyncDropdown" to="." method="_on_v_sync_dropdown_item_selected"]
+[connection signal="item_selected" from="Control/MarginContainer/VBoxContainer/FrameCapRow/MaxFPSDropdown" to="." method="_on_max_fps_dropdown_item_selected"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

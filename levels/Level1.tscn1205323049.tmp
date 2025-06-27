@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://btehrf4ql875"]
+
+[ext_resource type="Script" uid="uid://dlt3r1x3fst7f" path="res://levels/level_1.gd" id="1_ohbkr"]
+[ext_resource type="Texture2D" uid="uid://cou4mkfv12gdx" path="res://assets/grass.jpg" id="2_32mhh"]
+[ext_resource type="PackedScene" uid="uid://cbs26p3imgk0h" path="res://player/3d_godot_robot.tscn" id="3_ohbkr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ohbkr"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2j4y6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohbkr"]
+albedo_texture = ExtResource("2_32mhh")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b84ys"]
+material = SubResource("StandardMaterial3D_ohbkr")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohbkr"]
+size = Vector3(10, 1, 10)
+
+[node name="Level1" type="Node3D"]
+script = ExtResource("1_ohbkr")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_ohbkr")
+material = SubResource("StandardMaterial3D_2j4y6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGMesh3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CSGMesh3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505, 0)
+mesh = SubResource("PlaneMesh_b84ys")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGMesh3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_ohbkr")
+
+[node name="3DGodotRobot" parent="." instance=ExtResource("3_ohbkr")]
+walk_speed = null
+run_speed = null
+jump_velocity = null
+gravity = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)

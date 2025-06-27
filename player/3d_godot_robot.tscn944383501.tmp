@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbs26p3imgk0h"]
+
+[ext_resource type="PackedScene" uid="uid://c8lrm1liyo7un" path="res://player/3DGodotRobot.glb" id="1_kkxn5"]
+[ext_resource type="Script" uid="uid://dph6egrmqxg18" path="res://player/3d_godot_robot.gd" id="2_rmaah"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kkxn5"]
+
+[node name="3DGodotRobot" instance=ExtResource("1_kkxn5")]
+script = ExtResource("2_rmaah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kkxn5")

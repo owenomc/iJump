@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=3 uid="uid://cv5gn1uopx337"]
+
+[ext_resource type="Texture2D" uid="uid://6ymc11wie8rc" path="res://assets/FS002_Day_Sunless.png" id="1_1lejr"]
+[ext_resource type="Script" uid="uid://dosb81i6gypu4" path="res://levels/Map/map.gd" id="1_e8iiq"]
+[ext_resource type="PackedScene" uid="uid://b70cmekssahmq" path="res://assets/gameObjects/House1/House1.tscn" id="2_wegon"]
+[ext_resource type="PackedScene" uid="uid://cm8ctnojcqo02" path="res://player/player.tscn" id="3_f6owc"]
+[ext_resource type="Script" uid="uid://dy3qxxjd7jb6b" path="res://levels/Map/reset_zone.gd" id="6_4g1ds"]
+[ext_resource type="PackedScene" uid="uid://cif7510612brv" path="res://assets/gameObjects/bed/boxes.tscn" id="6_yp3po"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_e8iiq"]
+panorama = ExtResource("1_1lejr")
+
+[sub_resource type="Sky" id="Sky_yp3po"]
+sky_material = SubResource("PanoramaSkyMaterial_e8iiq")
+
+[sub_resource type="Environment" id="Environment_4g1ds"]
+background_mode = 2
+sky = SubResource("Sky_yp3po")
+fog_light_color = Color(3.27289e-06, 0.616508, 0.715248, 1)
+volumetric_fog_sky_affect = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e8iiq"]
+size = Vector3(100, 1, 100)
+
+[node name="Map" type="Node3D"]
+script = ExtResource("1_e8iiq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4g1ds")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.707107, -1.28028e-08, 0.707107, -0.707107, -3.09086e-08, 0.707107, 1.28028e-08, -1, -3.09086e-08, 50, 50, 0)
+light_energy = 2.0
+
+[node name="House1" parent="." instance=ExtResource("2_wegon")]
+
+[node name="Player" parent="." instance=ExtResource("3_f6owc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="Boxes" parent="." instance=ExtResource("6_yp3po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.73683, 0.300326, 3.26263)
+
+[node name="ResetZone" type="Area3D" parent="."]
+script = ExtResource("6_4g1ds")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ResetZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+shape = SubResource("BoxShape3D_e8iiq")

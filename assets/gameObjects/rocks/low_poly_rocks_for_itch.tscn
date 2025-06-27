@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmqmk1dysq3ap"]
+
+[ext_resource type="PackedScene" uid="uid://r0tme5iw3616" path="res://assets/gameObjects/rocks/Low Poly Rocks/low poly rocks for itch.glb" id="1_mlcu0"]
+
+[node name="low poly rocks for itch" instance=ExtResource("1_mlcu0")]
