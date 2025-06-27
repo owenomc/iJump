@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b70cmekssahmq"]
+[gd_scene load_steps=32 format=3 uid="uid://b70cmekssahmq"]
 
 [ext_resource type="ArrayMesh" uid="uid://qlgd2rj4uc60" path="res://assets/gameObjects/KayKit_DungeonRemastered_1.1_FREE/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/wall_corner_small.obj" id="1_l14aj"]
 [ext_resource type="ArrayMesh" uid="uid://daccx4ggmcqo5" path="res://assets/gameObjects/KayKit_DungeonRemastered_1.1_FREE/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/wall.obj" id="2_2pedn"]
@@ -43,6 +43,9 @@ size = Vector3(0.5, 1, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8u7d5"]
 size = Vector3(16, 0.25, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cfea"]
+size = Vector3(0.5, 1.2, 9)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yot4q"]
 size = Vector3(0.75, 1, 0.75)
@@ -102,6 +105,22 @@ shape = SubResource("BoxShape3D_820ft")
 [node name="CollisionShape3D9" type="CollisionShape3D" parent="House/Collsions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 shape = SubResource("BoxShape3D_8u7d5")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="House/Collsions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 2.1, 0)
+shape = SubResource("BoxShape3D_5cfea")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="House/Collsions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 2.1, 0)
+shape = SubResource("BoxShape3D_5cfea")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="House/Collsions"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.1, 4.25)
+shape = SubResource("BoxShape3D_5cfea")
+
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="House/Collsions"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.1, -4.25)
+shape = SubResource("BoxShape3D_5cfea")
 
 [node name="WallCornerSmall3" type="MeshInstance3D" parent="House"]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5, 0, -5)
@@ -211,7 +230,7 @@ mesh = ExtResource("12_wximw")
 skeleton = NodePath("../..")
 
 [node name="BarrierCorner" type="MeshInstance3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35, 4, -4.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 4, -4.25)
 mesh = ExtResource("15_uxu3b")
 skeleton = NodePath("../..")
 

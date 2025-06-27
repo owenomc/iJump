@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://djf8x586ukbex"]
 
-[ext_resource type="Script" uid="uid://disbav5q0lok2" path="res://player/sleep.gd" id="1_oifi5"]
+[ext_resource type="Script" uid="uid://disbav5q0lok2" path="res://assets/gameObjects/bed/sleep.gd" id="1_oifi5"]
 [ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="2_0ttw4"]
 
 [node name="Sleep" type="CanvasLayer"]
