@@ -43,7 +43,7 @@ Hold and jump through a vibrant world full of surprises!
 
 Found a bug? Got a killer idea? I am also looking for assets & music/sound effects! Reach out!
 
-- Twitter: [@owenomc_](https://twitter.com/owenomc_)
+- Twitter/X: [@owenomc_](https://x.com/owenomc_)
 - Email: owenmcrandall@gmail.com
 - Issues & suggestions: *Coming soon!*
 
