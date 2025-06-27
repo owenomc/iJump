@@ -1,5 +1,5 @@
 
-Welcome to **iJump** — A Clumsy, unquie and difficult adventure crafted with passion in **Godot 4.4.1** made by one solo dev: **Owen C.**
+Welcome to **iJump** — A Clumsy, unquie and difficult adventure crafted with passion in **Godot 4.4.1** made by a solo dev: **Owen C.**
 
 ---
 
@@ -41,7 +41,7 @@ Hold and jump through a vibrant world full of surprises!
 
 ## Get Involved
 
-Found a bug? Got a killer idea? Want to show off your high score? Hit me up!
+Found a bug? Got a killer idea? I am also looking for assets & music/sound effects! Reach out!
 
 - Twitter: [@OwenC_Dev](https://twitter.com/owenomc_)
 - Email: owenmcrandall@gmail.com
