@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxhfwe38vnbk7"]
+
+[ext_resource type="PackedScene" uid="uid://p7opsl1mnljd" path="res://assets/gameObjects/car/car.tscn" id="1_ih655"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ih655"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yy51"]
+albedo_color = Color(0.278431, 0.435294, 0.219608, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ymtwy"]
+material = SubResource("StandardMaterial3D_5yy51")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ih655"]
+size = Vector3(100, 0.5, 100)
+
+[node name="Cartest" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0)
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 20)
+mesh = SubResource("BoxMesh_ih655")
+skeleton = NodePath("../Plane")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ymtwy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_ih655")
+
+[node name="Car" parent="." instance=ExtResource("1_ih655")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 20, 0)

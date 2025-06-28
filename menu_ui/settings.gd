@@ -1,17 +1,13 @@
 extends Control
 
-@onready var fullscreen_dropdown = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/FullscreenDropdown
-@onready var vsync_dropdown = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/VSyncDropdown
-@onready var max_fps_dropdown = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/MaxFPSDropdown
-@onready var audio_volume_slider = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/AudioVolumeSlider
+@onready var fullscreen_dropdown = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/FullscreenDropdown
+@onready var vsync_dropdown = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/VSyncDropdown
+@onready var max_fps_dropdown = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/MaxFPSDropdown
 
-var config := ConfigFile.new()
-const CONFIG_PATH := "user://settings.cfg"
-
+var current_save_slot := 1  # change as needed
 var fps_limits := [60, 120, 144, 240, 360]
 
 func _ready():
-
 	fullscreen_dropdown.clear()
 	fullscreen_dropdown.add_item("ON")
 	fullscreen_dropdown.add_item("OFF")
@@ -24,57 +20,41 @@ func _ready():
 	for fps in fps_limits:
 		max_fps_dropdown.add_item(str(fps))
 
-	load_settings()
+	# Try loading
+	if SaveManager.load(current_save_slot):
+		apply_all_settings_from_save_data()
 
-func load_settings():
-	if config.load(CONFIG_PATH) == OK:
-		var full_index = config.get_value("video", "fullscreen", 0)
-		var vsync_index = config.get_value("video", "vsync", 0)
-		var fps_index = config.get_value("video", "max_fps", 0)
-		var volume = config.get_value("audio", "music_volume", 100)
+# === Settings Helpers ===
 
-		fullscreen_dropdown.select(full_index)
-		vsync_dropdown.select(vsync_index)
-		max_fps_dropdown.select(fps_index)
-		audio_volume_slider.value = volume
+func save_all_settings_to_save_data():
+	SaveManager.save_data["settings"]["fullscreen"] = fullscreen_dropdown.get_selected_id()
+	SaveManager.save_data["settings"]["vsync"] = vsync_dropdown.get_selected_id()
+	SaveManager.save_data["settings"]["max_fps"] = max_fps_dropdown.get_selected_id()
 
-		apply_fullscreen_setting(full_index)
-		apply_vsync_setting(vsync_index)
-		apply_frame_cap_setting(fps_index)
-		apply_music_volume(volume)
+func apply_all_settings_from_save_data():
+	var s = SaveManager.save_data["settings"]
+	fullscreen_dropdown.select(s["fullscreen"])
+	vsync_dropdown.select(s["vsync"])
+	max_fps_dropdown.select(s["max_fps"])
+	apply_fullscreen_setting(s["fullscreen"])
+	apply_vsync_setting(s["vsync"])
+	apply_frame_cap_setting(s["max_fps"])
 
-func save_setting(section: String, key: String, value):
-	config.set_value(section, key, value)
-	config.save(CONFIG_PATH)
+# === Dropdown signal handlers ===
 
-# --- Dropdown signal handlers ---
 func _on_fullscreen_dropdown_item_selected(index: int) -> void:
-	save_setting("video", "fullscreen", index)
-	$button_sound.play()
+	apply_fullscreen_setting(index)
 
 func _on_v_sync_dropdown_item_selected(index: int) -> void:
-	save_setting("video", "vsync", index)
 	apply_vsync_setting(index)
-	$button_sound.play()
 
 func _on_max_fps_dropdown_item_selected(index: int) -> void:
-	save_setting("video", "max_fps", index)
 	apply_frame_cap_setting(index)
-	$button_sound.play()
 
-# --- Music volume slider handler ---
-func _on_music_volume_slider_value_changed(value: float) -> void:
-	save_setting("audio", "music_volume", value)
-	apply_music_volume(value)
+# === Apply Settings ===
 
-# --- Apply Settings ---
 func apply_fullscreen_setting(index: int):
-	if index == 0:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if index == 0 else DisplayServer.WINDOW_MODE_WINDOWED)
 
 func apply_vsync_setting(index: int):
 	var vsync_mode = DisplayServer.VSYNC_ENABLED if index == 0 else DisplayServer.VSYNC_DISABLED
@@ -84,52 +64,16 @@ func apply_frame_cap_setting(index: int):
 	if index >= 0 and index < fps_limits.size():
 		Engine.max_fps = fps_limits[index]
 	else:
-		Engine.max_fps = 0 # Unlimited fallback
+		Engine.max_fps = 0
 
-func apply_music_volume(value: float):
-	var volume_db = linear_to_db(value / 100.0)
-	AudioManager.background_audio.volume_db = volume_db
+# === Buttons ===
 
-# --- Reset ---
-func _on_reset_button_pressed() -> void:
+func _on_apply_button_pressed():
+	save_all_settings_to_save_data()
+	SaveManager.save(current_save_slot)
+
+func _on_reset_button_pressed():
 	fullscreen_dropdown.select(0)
-	vsync_dropdown.select(0)
-	max_fps_dropdown.select(0)
-	audio_volume_slider.value = 100
+	vsync_dropdown.select(1)
+	max_fps_dropdown.select(1)
 	_on_apply_button_pressed()
-
-# --- Back ---
-func _on_back_button_pressed() -> void:
-	$button_sound.play()
-	await _play_delay()
-	get_tree().change_scene_to_file("res://menu_ui/menu_manager.tscn")
-
-# --- Apply button logic ---
-func _on_apply_button_pressed() -> void:
-	$button_sound.play()
-
-	var full_index = fullscreen_dropdown.get_selected_id()
-	var vsync_index = vsync_dropdown.get_selected_id()
-	var fps_index = max_fps_dropdown.get_selected_id()
-	var volume = audio_volume_slider.value
-
-	save_setting("video", "fullscreen", full_index)
-	save_setting("video", "vsync", vsync_index)
-	save_setting("video", "max_fps", fps_index)
-	save_setting("audio", "music_volume", volume)
-
-	apply_fullscreen_setting(full_index)
-	apply_vsync_setting(vsync_index)
-	apply_frame_cap_setting(fps_index)
-	apply_music_volume(volume)
-
-	await _play_delay()
-
-# --- Button delay helper ---
-func _play_delay() -> void:
-	var timer = Timer.new()
-	timer.wait_time = 0.1
-	timer.one_shot = true
-	add_child(timer)
-	timer.start()
-	await timer.timeout

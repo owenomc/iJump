@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://ds2v6dwl6hhur"]
+
+[ext_resource type="PackedScene" uid="uid://cm8ctnojcqo02" path="res://player/player.tscn" id="1_edoka"]
+
+[sub_resource type="Environment" id="Environment_edoka"]
+background_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edoka"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_edoka"]
+material = SubResource("StandardMaterial3D_edoka")
+size = Vector3(10, 5, 0.2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_edoka"]
+data = PackedVector3Array(-5, 2.5, 0.1, 5, 2.5, 0.1, -5, -2.5, 0.1, 5, 2.5, 0.1, 5, -2.5, 0.1, -5, -2.5, 0.1, 5, 2.5, -0.1, -5, 2.5, -0.1, 5, -2.5, -0.1, -5, 2.5, -0.1, -5, -2.5, -0.1, 5, -2.5, -0.1, 5, 2.5, 0.1, 5, 2.5, -0.1, 5, -2.5, 0.1, 5, 2.5, -0.1, 5, -2.5, -0.1, 5, -2.5, 0.1, -5, 2.5, -0.1, -5, 2.5, 0.1, -5, -2.5, -0.1, -5, 2.5, 0.1, -5, -2.5, 0.1, -5, -2.5, -0.1, 5, 2.5, 0.1, -5, 2.5, 0.1, 5, 2.5, -0.1, -5, 2.5, 0.1, -5, 2.5, -0.1, 5, 2.5, -0.1, -5, -2.5, 0.1, 5, -2.5, 0.1, -5, -2.5, -0.1, 5, -2.5, 0.1, 5, -2.5, -0.1, -5, -2.5, -0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi4l7"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xi4l7"]
+material = SubResource("StandardMaterial3D_xi4l7")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_edoka"]
+size = Vector3(10, 1, 10)
+
+[node name="Playertest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_edoka")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 4)
+mesh = SubResource("BoxMesh_edoka")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_edoka")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_xi4l7")
+skeleton = NodePath("../Player")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_edoka")
+
+[node name="Player" parent="." instance=ExtResource("1_edoka")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0432183, 0.999066, 0, -0.999066, -0.0432183, 0, 6.40325, 0)

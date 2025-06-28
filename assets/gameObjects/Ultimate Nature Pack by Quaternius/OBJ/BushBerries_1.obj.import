@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://314gck0xc80g"
+path="res://.godot/imported/BushBerries_1.obj-3a48635b9601762941a0c03da2fa9600.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BushBerries_1.obj-3a48635b9601762941a0c03da2fa9600.mesh"]
+
+source_file="res://assets/gameObjects/Ultimate Nature Pack by Quaternius/OBJ/BushBerries_1.obj"
+dest_files=["res://.godot/imported/BushBerries_1.obj-3a48635b9601762941a0c03da2fa9600.mesh", "res://.godot/imported/BushBerries_1.obj-3a48635b9601762941a0c03da2fa9600.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

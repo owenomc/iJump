@@ -3,12 +3,15 @@ extends CharacterBody3D
 # === CONFIGURABLE STATS ===
 @export var walk_speed := 3.0
 @export var run_speed := 6.0
-@export var jump_velocity := 15.0
-@export var gravity := 30
-@export var mouse_sensitivity := 0.003
+@export var jump_velocity := 10.0
+@export var gravity := 15.0
+@export var mouse_sensitivity := 0.001
 @export var max_jump_charge_time := 0.8
-@export var mantle_height := 1.5
-@export var mantle_duration := 1
+@export var mantle_height := 1.0
+@export var mantle_duration := .6
+
+# === JUMP AUDIO ===
+@onready var jump_sound = $AudioStreamPlayer3D
 
 # === CAMERA SETTINGS ===
 @onready var spring_arm := $SpringArm3D
@@ -31,7 +34,7 @@ var jump_charge_bar: ProgressBar
 var yaw := 0.0
 var pitch := 0.0
 const PITCH_MIN := deg_to_rad(-50)
-const PITCH_MAX := deg_to_rad(20)
+const PITCH_MAX := deg_to_rad(50)
 
 var jump_charge := 0.0
 var is_charging_jump := false
@@ -48,10 +51,13 @@ var move_dir_inertia := Vector3.ZERO
 var near_bed := false
 var nearby_bed_node = null
 
+# === Flashlight ===
+@onready var flashlight_spot = $Flashlight/SpotLight3D
+@onready var flashlight_omni = $Flashlight/OmniLight3D
+
 func _ready():
 	name = "Player"
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	PlayerManager.set_current_player(self)
 
 	spring_arm.spring_length = 4.0
 	spring_arm.margin = 0.25
@@ -64,11 +70,15 @@ func _ready():
 	spring_arm.visible = not is_first_person
 	mesh.visible = not is_first_person  # Show mesh only in third person
 	
-	jump_charge_bar = get_node_or_null("PlayerUI/VBoxContainer/JumpChargeBar")
+	jump_charge_bar = get_node_or_null("PlayerUI/JumpChargeBar")
 	if jump_charge_bar == null:
 		print("JumpChargeBar not found")
 
 func _input(event):
+	if event.is_action_pressed("flashlight_toggle"):
+		flashlight_spot.visible = not flashlight_spot.visible
+		flashlight_omni.visible = not flashlight_omni.visible
+
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		yaw -= event.relative.x * mouse_sensitivity
 		pitch = clamp(pitch - event.relative.y * mouse_sensitivity, PITCH_MIN, PITCH_MAX)
@@ -262,6 +272,7 @@ func handle_jump_logic(delta):
 			is_charging_jump = true
 			jump_charge = min(jump_charge + delta, max_jump_charge_time)
 		elif is_charging_jump:
+			jump_sound.play()
 			var ratio = jump_charge / max_jump_charge_time
 			velocity.y = jump_velocity * ratio
 			is_charging_jump = false
@@ -275,6 +286,7 @@ func start_mantle():
 	is_mantling = true
 	mantle_timer = 0.0
 	play_anim("Cheer")
+	jump_sound.play()
 	velocity = Vector3(velocity.x, jump_velocity * 1.2, velocity.z)
 
 func handle_mantle(delta):
@@ -301,25 +313,4 @@ func play_anim(anim_name: String) -> void:
 		anim_player.play(anim_name)
 
 func update_jump_ui():
-	if jump_charge_bar:
-		jump_charge_bar.value = jump_charge
-		jump_charge_bar.visible = is_charging_jump
-
-func _on_bed_area_entered(_bed):
-	near_bed = true
-	nearby_bed_node = _bed
-
-func _on_bed_area_exited(_bed):
-	near_bed = false
-	nearby_bed_node = null
-
-func respawn(new_position: Vector3) -> void:
-	global_transform.origin = new_position
-	velocity = Vector3.ZERO
-	move_dir_inertia = Vector3.ZERO
-	move_dir_smoothed = Vector3.ZERO
-
-	var rot = (spring_arm if not is_first_person else camera_fps).rotation
-	pitch = rot.x
-	yaw = rot.y
-	mesh.rotation.y = yaw
+	jump_charge_bar.value = jump_charge

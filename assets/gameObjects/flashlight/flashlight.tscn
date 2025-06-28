@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4a4aa3xn8vvp"]
+
+[ext_resource type="PackedScene" uid="uid://sw5q63yhcrdc" path="res://assets/gameObjects/flashlight/Flashlight.fbx" id="1_v26w0"]
+[ext_resource type="ArrayMesh" uid="uid://du78m3w05qs5a" path="res://assets/gameObjects/KayKit_DungeonRemastered_1.1_FREE/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/candle_lit.obj" id="2_iropg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v26w0"]
+radius = 0.3
+
+[node name="Flashlight" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_v26w0")
+
+[node name="Flashlight" parent="." instance=ExtResource("1_v26w0")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+spot_range = 20.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.194251)
+
+[node name="CandleLit" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0.25)
+visible = false
+mesh = ExtResource("2_iropg")
