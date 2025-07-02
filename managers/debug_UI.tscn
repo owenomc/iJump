@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://dxfxbgjjdvvia"]
+
+[node name="DebugUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 500.0
+grow_vertical = 2
+color = Color(0, 0, 0, 0.321569)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 400.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="PlayerPosition2" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG MENU (F1 Toggle)"
+
+[node name="SPACE" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="SceneName" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Current Scene:"
+
+[node name="SPACE2" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 0.360784)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 400.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="GraphicsCard" type="Label" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+text = "GPU:
+"
+
+[node name="SPACE" type="Label" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="Processor" type="Label" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+text = "CPU:"
+
+[node name="SPACE2" type="Label" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Frames" type="Label" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+text = "FPS:"
+
+[node name="SPACE3" type="Label" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2

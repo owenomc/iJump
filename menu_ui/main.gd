@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_button_1_pressed() -> void:
@@ -11,7 +12,8 @@ func _on_button_1_pressed() -> void:
 	add_child(timer)
 	timer.start()
 	await timer.timeout
-	get_tree().change_scene_to_file("res://menu_ui/Saves/SaveMenu.tscn")
+	print("Pressed Play")
+	get_tree().change_scene_to_file("res://levels/map/Map.tscn")
 
 func _on_button_2_pressed() -> void:
 	$button_sound.play()

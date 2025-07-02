@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ckvpajwmrsvb3" path="res://menu_ui/main.gd" id="1_t7737"]
 [ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="2_y2pfb"]
-[ext_resource type="PackedScene" uid="uid://hff721kp5mqc" path="res://levels/MenuMap.tscn" id="4_5m2xm"]
-[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/Mixkit/mixkit-cool-interface-click-tone-2568.wav" id="4_jh0yp"]
+[ext_resource type="PackedScene" uid="uid://hff721kp5mqc" path="res://levels/menuMap/menuMap.tscn" id="4_5m2xm"]
+[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav" id="4_jh0yp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03q7c"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -18,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_t7737")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -48,9 +49,8 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_y2pfb")
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 125
-text = "iJump"
+theme_override_font_sizes/font_size = 100
+text = "SKYJUMP KINGDOM"
 horizontal_alignment = 1
 
 [node name="Button1" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
@@ -123,10 +123,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -40.0
-offset_right = 400.0
+offset_right = 335.0
 grow_vertical = 0
 theme = ExtResource("2_y2pfb")
-theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 35
 text = "version 0.0.1"
 horizontal_alignment = 1
@@ -140,7 +139,7 @@ layer = 0
 [node name="MenuMap" parent="CanvasLayer2" instance=ExtResource("4_5m2xm")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.766044, 0.271654, 0.582563, 0, 0.906308, -0.422618, -0.642788, 0.323744, 0.694272, 30, 3.5, 12)
+transform = Transform3D(0.642787, 0.198267, 0.739942, 0, 0.965926, -0.258819, -0.766044, 0.166366, 0.620885, 35, 4, 25)
 current = true
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Button1" to="CanvasLayer/Control" method="_on_button_1_pressed"]

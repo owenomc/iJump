@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cvih2m4c80etu"
-path="res://.godot/imported/mixkit-classical-6-713.mp3-7806a05a81cd0b3d5d8bea99a1706855.mp3str"
+path="res://.godot/imported/mixkit-classical-6-713.mp3-aed12cc2fa02fc8b9416989c1ab54daa.mp3str"
 
 [deps]
 
-source_file="res://assets/music/Mixkit/mixkit-classical-6-713.mp3"
-dest_files=["res://.godot/imported/mixkit-classical-6-713.mp3-7806a05a81cd0b3d5d8bea99a1706855.mp3str"]
+source_file="res://assets/music/mixkit/mixkit-classical-6-713.mp3"
+dest_files=["res://.godot/imported/mixkit-classical-6-713.mp3-aed12cc2fa02fc8b9416989c1ab54daa.mp3str"]
 
 [params]
 

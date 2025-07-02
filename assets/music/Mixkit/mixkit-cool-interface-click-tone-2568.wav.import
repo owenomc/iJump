@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cuebf5ffmk1af"
-path="res://.godot/imported/mixkit-cool-interface-click-tone-2568.wav-f1e126f2a2c40f23fc7e7be7795226e0.sample"
+path="res://.godot/imported/mixkit-cool-interface-click-tone-2568.wav-6847790aa67cb65b431c0d50541c92f9.sample"
 
 [deps]
 
-source_file="res://assets/music/Mixkit/mixkit-cool-interface-click-tone-2568.wav"
-dest_files=["res://.godot/imported/mixkit-cool-interface-click-tone-2568.wav-f1e126f2a2c40f23fc7e7be7795226e0.sample"]
+source_file="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav"
+dest_files=["res://.godot/imported/mixkit-cool-interface-click-tone-2568.wav-6847790aa67cb65b431c0d50541c92f9.sample"]
 
 [params]
 

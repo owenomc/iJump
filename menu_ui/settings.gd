@@ -8,6 +8,9 @@ var current_save_slot := 1  # change as needed
 var fps_limits := [60, 120, 144, 240, 360]
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	fullscreen_dropdown.clear()
 	fullscreen_dropdown.add_item("ON")
 	fullscreen_dropdown.add_item("OFF")
@@ -19,26 +22,6 @@ func _ready():
 	max_fps_dropdown.clear()
 	for fps in fps_limits:
 		max_fps_dropdown.add_item(str(fps))
-
-	# Try loading
-	if SaveManager.load(current_save_slot):
-		apply_all_settings_from_save_data()
-
-# === Settings Helpers ===
-
-func save_all_settings_to_save_data():
-	SaveManager.save_data["settings"]["fullscreen"] = fullscreen_dropdown.get_selected_id()
-	SaveManager.save_data["settings"]["vsync"] = vsync_dropdown.get_selected_id()
-	SaveManager.save_data["settings"]["max_fps"] = max_fps_dropdown.get_selected_id()
-
-func apply_all_settings_from_save_data():
-	var s = SaveManager.save_data["settings"]
-	fullscreen_dropdown.select(s["fullscreen"])
-	vsync_dropdown.select(s["vsync"])
-	max_fps_dropdown.select(s["max_fps"])
-	apply_fullscreen_setting(s["fullscreen"])
-	apply_vsync_setting(s["vsync"])
-	apply_frame_cap_setting(s["max_fps"])
 
 # === Dropdown signal handlers ===
 
@@ -68,12 +51,10 @@ func apply_frame_cap_setting(index: int):
 
 # === Buttons ===
 
-func _on_apply_button_pressed():
-	save_all_settings_to_save_data()
-	SaveManager.save(current_save_slot)
-
 func _on_reset_button_pressed():
 	fullscreen_dropdown.select(0)
 	vsync_dropdown.select(1)
 	max_fps_dropdown.select(1)
-	_on_apply_button_pressed()
+
+func _on_back_button_pressed():
+	get_tree().change_scene_to_file("res://menu_ui/main.tscn")

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://2xh21xbmx45i" path="res://menu_ui/settings.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="2_tvpij"]
 [ext_resource type="StyleBox" uid="uid://0mthtc2t6wh4" path="res://assets/color/black.tres" id="3_1wg4y"]
-[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/Mixkit/mixkit-cool-interface-click-tone-2568.wav" id="3_fe80l"]
-[ext_resource type="PackedScene" uid="uid://hff721kp5mqc" path="res://levels/MenuMap.tscn" id="5_1wg4y"]
+[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav" id="3_fe80l"]
+[ext_resource type="PackedScene" uid="uid://hff721kp5mqc" path="res://levels/menuMap/menuMap.tscn" id="5_1wg4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sy4xk"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

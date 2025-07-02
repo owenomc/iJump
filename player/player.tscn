@@ -1,35 +1,39 @@
-[gd_scene load_steps=9 format=3 uid="uid://cm8ctnojcqo02"]
+[gd_scene load_steps=11 format=3 uid="uid://cm8ctnojcqo02"]
 
 [ext_resource type="PackedScene" uid="uid://201dt1njvo7k" path="res://assets/gameObjects/KayKit_Skeletons_1.0_FREE/KayKit_Skeletons_1.0_FREE/characters/gltf/Skeleton_Rogue.glb" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dbrbjvdtmr5a1" path="res://player/player.gd" id="1_yw30f"]
 [ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="3_qjkh3"]
-[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/Mixkit/mixkit-cool-interface-click-tone-2568.wav" id="4_yw30f"]
+[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://b4a4aa3xn8vvp" path="res://assets/gameObjects/flashlight/flashlight.tscn" id="5_qjkh3"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkbax"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qjkh3"]
+radius = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g6k8r"]
+radius = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1dw6"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yw30f"]
-bg_color = Color(0.88458, 0.340951, 0.368824, 1)
+bg_color = Color(0.745098, 0.364706, 0.372549, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkbax"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_yw30f")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_rkbax")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.330794, -0.943703, 0, 0.943703, 0.330794, -0.5, 1.3, 0.5)
+visible = false
+mesh = SubResource("CapsuleMesh_qjkh3")
+skeleton = NodePath("")
 
-[node name="Skeleton_Rogue" parent="." instance=ExtResource("1_oul6g")]
-
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
-
-[node name="Camera3Dfps" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.75, 0)
-current = true
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.330794, -0.943703, 0, 0.943703, 0.330794, 0.5, 1.3, 0.5)
+visible = false
+mesh = SubResource("CapsuleMesh_g6k8r")
+skeleton = NodePath("")
 
 [node name="PlayerUI" type="Control" parent="."]
 layout_mode = 3
@@ -58,14 +62,28 @@ theme_override_styles/background = SubResource("StyleBoxFlat_g1dw6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yw30f")
 max_value = 0.8
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rkbax")
+
+[node name="Skeleton_Rogue" parent="." instance=ExtResource("1_oul6g")]
+visible = false
+
+[node name="Camera3Dfps" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.75, 0)
+current = true
+
 [node name="MantleRay" type="RayCast3D" parent="."]
 transform = Transform3D(-0.99863, -0.0523359, -2.28768e-09, 3.82137e-15, 4.37114e-08, -1, 0.0523359, -0.99863, -4.36515e-08, 0, 1, 0)
 
 [node name="MantleCheckAbove" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.25, 0)
 
+[node name="Flashlight" parent="." instance=ExtResource("5_qjkh3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+visible = false
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_yw30f")
 
-[node name="Flashlight" parent="." instance=ExtResource("5_qjkh3")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.4, 1.5, 0.25)
+[node name="MantleTimer" type="Timer" parent="."]

@@ -1,17 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv5gn1uopx337"]
+[gd_scene load_steps=10 format=3 uid="uid://cv5gn1uopx337"]
 
-[ext_resource type="Script" uid="uid://dosb81i6gypu4" path="res://levels/Map/map.gd" id="1_e8iiq"]
-[ext_resource type="PackedScene" uid="uid://b70cmekssahmq" path="res://assets/gameObjects/MainPlatforms/Platform1.tscn" id="2_wegon"]
+[ext_resource type="Script" uid="uid://dosb81i6gypu4" path="res://levels/map/map.gd" id="1_e8iiq"]
+[ext_resource type="PackedScene" uid="uid://b70cmekssahmq" path="res://levels/Rocky Clouds/Platform1.tscn" id="2_wegon"]
 [ext_resource type="PackedScene" uid="uid://cm8ctnojcqo02" path="res://player/player.tscn" id="3_f6owc"]
-[ext_resource type="PackedScene" uid="uid://crjotnh1b673g" path="res://assets/gameObjects/MainPlatforms/Platform2.tscn" id="5_a4g5l"]
-[ext_resource type="PackedScene" uid="uid://c3ys0li3lvpuk" path="res://assets/gameObjects/MainPlatforms/Platform3.tscn" id="7_3exy5"]
+[ext_resource type="PackedScene" uid="uid://crjotnh1b673g" path="res://levels/Rocky Clouds/Platform2.tscn" id="5_a4g5l"]
+[ext_resource type="PackedScene" uid="uid://c3ys0li3lvpuk" path="res://levels/Rocky Clouds/Platform3.tscn" id="7_3exy5"]
 [ext_resource type="PackedScene" uid="uid://b1a5p4ctadrct" path="res://assets/skybox/skydome1.tscn" id="10_3exy5"]
-[ext_resource type="PackedScene" uid="uid://bbrnfl7a60d3f" path="res://assets/gameObjects/MainPlatforms/Platform4.tscn" id="10_81qxv"]
-[ext_resource type="PackedScene" uid="uid://bnjhjgyaredu8" path="res://menu_ui/paused.tscn" id="10_aob05"]
-[ext_resource type="PackedScene" uid="uid://dcpdtcquyj2jj" path="res://assets/gameObjects/MainPlatforms/Platform5.tscn" id="11_3exy5"]
+[ext_resource type="PackedScene" uid="uid://bbrnfl7a60d3f" path="res://levels/Rocky Clouds/Platform4.tscn" id="10_81qxv"]
+[ext_resource type="PackedScene" uid="uid://dcpdtcquyj2jj" path="res://levels/Rocky Clouds/Platform5.tscn" id="11_3exy5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e8iiq"]
-size = Vector3(100, 1, 100)
+size = Vector3(2000, 1, 2000)
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_e8iiq")
@@ -42,6 +41,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -117.029, 570.671, -121.788)
 [node name="Player" parent="." instance=ExtResource("3_f6owc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="PausedMenu" parent="UI" instance=ExtResource("10_aob05")]
+[connection signal="body_entered" from="ResetZone" to="." method="_on_reset_zone_body_entered"]

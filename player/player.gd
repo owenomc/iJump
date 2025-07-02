@@ -14,8 +14,6 @@ extends CharacterBody3D
 @onready var jump_sound = $AudioStreamPlayer3D
 
 # === CAMERA SETTINGS ===
-@onready var spring_arm := $SpringArm3D
-@onready var camera := $SpringArm3D/Camera3D
 @onready var camera_fps := $Camera3Dfps
 var is_first_person := true
 
@@ -26,9 +24,12 @@ var is_first_person := true
 # === UI ===
 var jump_charge_bar: ProgressBar
 
-# === RAYCASTS FOR MANTLING ===
+# === MANTLING ===
 @onready var mantle_ray := $MantleRay
 @onready var mantle_check_above := $MantleCheckAbove
+var mantle_cooldown := 0.5
+var mantle_cooldown_timer := 0.0
+var is_mantling := false
 
 # === INTERNAL STATE ===
 var yaw := 0.0
@@ -38,8 +39,6 @@ const PITCH_MAX := deg_to_rad(50)
 
 var jump_charge := 0.0
 var is_charging_jump := false
-var is_mantling := false
-var mantle_timer := 0.0
 
 # Clumsy wobble
 var wobble_strength := 0.25
@@ -55,21 +54,56 @@ var nearby_bed_node = null
 @onready var flashlight_spot = $Flashlight/SpotLight3D
 @onready var flashlight_omni = $Flashlight/OmniLight3D
 
+# === Ice Pick ===
+@onready var camera = $Camera3Dfps
+@onready var pickaxe1 = preload("res://assets/gameObjects/picks/picks.tscn").instantiate()
+@onready var pickaxe2 = preload("res://assets/gameObjects/picks/picks.tscn").instantiate()
+var is_swinging_1 := false
+var is_swinging_2 := false
+
+func swing_pickaxe(pickaxe: Node3D, index: int) -> void:
+	if (index == 1 and is_swinging_1) or (index == 2 and is_swinging_2):
+		return  # Prevent double-swing
+
+	if index == 1:
+		is_swinging_1 = true
+	else:
+		is_swinging_2 = true
+
+	var start_pos = pickaxe.position
+	var down_pos = start_pos + Vector3(0, -0.5, 0)
+
+	pickaxe.position = down_pos
+	await get_tree().create_timer(0.1).timeout
+	pickaxe.position = start_pos
+
+	if index == 1:
+		is_swinging_1 = false
+	else:
+		is_swinging_2 = false
+
 func _ready():
-	name = "Player"
+
+	# Use Mouse Captured
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	spring_arm.spring_length = 4.0
-	spring_arm.margin = 0.25
-	
-	update_camera_mode()
-	
-	# Force first person at start
-	camera_fps.current = is_first_person
-	camera.current = not is_first_person
-	spring_arm.visible = not is_first_person
-	mesh.visible = not is_first_person  # Show mesh only in third person
-	
+	# Added pickaxes
+	camera.add_child(pickaxe1)
+	camera.add_child(pickaxe2)
+
+	# Position pickaxes
+	pickaxe1.position = Vector3(-1, -0.5, -1)
+	pickaxe2.position = Vector3(1, -0.5, -1)
+
+	# Flip them to face forward (Y-axis)
+	pickaxe1.rotation_degrees.y = 180
+	pickaxe2.rotation_degrees.y = 180
+
+	# Tilt them inward slightly (Z-axis)
+	pickaxe1.rotation_degrees.z = 15    # tilt right hand inward
+	pickaxe2.rotation_degrees.z = -15   # tilt left hand inward
+
+	# Updates Jump UI
 	jump_charge_bar = get_node_or_null("PlayerUI/JumpChargeBar")
 	if jump_charge_bar == null:
 		print("JumpChargeBar not found")
@@ -88,23 +122,9 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		elif event.is_action_pressed("toggle_fps"):
-			toggle_camera_mode()
-		elif event.keycode == KEY_E and near_bed and nearby_bed_node != null:
-			nearby_bed_node.sleep_here()
 
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func update_camera_mode():
-	camera_fps.current = is_first_person
-	camera.current = not is_first_person
-	spring_arm.visible = not is_first_person
-	mesh.visible = not is_first_person  # Show mesh only in third person
-
-func toggle_camera_mode():
-	is_first_person = not is_first_person
-	update_camera_mode()
 
 func get_input_vector() -> Vector2:
 	var x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -137,13 +157,11 @@ func _physics_process(delta: float) -> void:
 	if is_first_person:
 		camera_fps.rotation.x = pitch
 		rotation.y = yaw
-	else:
-		spring_arm.rotation = Vector3(pitch, yaw, 0)
 
 	# === MOVEMENT ===
 	var move_dir := Vector3.ZERO
 	if move_input.length() > 0.1:
-		var cam_basis = camera_fps.global_transform.basis if is_first_person else spring_arm.global_transform.basis
+		var cam_basis = camera_fps.global_transform.basis
 		var forward = -cam_basis.z.normalized()
 		var right = cam_basis.x.normalized()
 		move_dir = (right * move_input.x + forward * move_input.y).normalized()
@@ -175,10 +193,15 @@ func _physics_process(delta: float) -> void:
 	handle_jump_logic(delta)
 
 	# === MANTLING ===
-	if Input.is_action_pressed("jump") and not is_on_floor():
-		if mantle_ray.is_colliding() and not mantle_check_above.is_colliding():
-			start_mantle()
+	# Decrement cooldown timer if active
+	if mantle_cooldown_timer > 0.0:
+		mantle_cooldown_timer -= delta
 
+	# Mantle input check
+	if Input.is_action_pressed("jump") and not is_on_floor():
+		if mantle_cooldown_timer <= 0.0 and mantle_ray.is_colliding() and not mantle_check_above.is_colliding():
+			start_mantle()
+	
 	# === MOVE & ANIMATE ===
 	move_and_slide()
 	handle_animation()
@@ -188,7 +211,7 @@ func _physics_process(delta: float) -> void:
 func handle_movement_with_input(input_vec: Vector2, delta: float):
 	var move_dir = Vector3.ZERO
 	if input_vec.length() > 0:
-		var cam_basis = (camera_fps if is_first_person else spring_arm).global_transform.basis
+		var cam_basis = (camera_fps).global_transform.basis
 		var forward = -cam_basis.z.normalized()
 		var right = cam_basis.x.normalized()
 		move_dir = (right * input_vec.x + forward * input_vec.y).normalized()
@@ -217,7 +240,7 @@ func handle_movement_with_input(input_vec: Vector2, delta: float):
 
 	# Mantle
 	if Input.is_action_pressed("jump") and not is_on_floor():
-		if mantle_ray.is_colliding() and not mantle_check_above.is_colliding():
+		if mantle_cooldown_timer <= 0.0 and mantle_ray.is_colliding() and not mantle_check_above.is_colliding():
 			start_mantle()
 
 	handle_movement(delta)
@@ -235,7 +258,7 @@ func handle_movement(_delta):
 
 	var move_dir = Vector3.ZERO
 	if input_vec.length() > 0:
-		var cam_basis = (camera_fps if is_first_person else spring_arm).global_transform.basis
+		var cam_basis = (camera_fps).global_transform.basis
 		var forward = -cam_basis.z.normalized()
 		var right = cam_basis.x.normalized()
 		move_dir = (right * input_vec.x + forward * input_vec.y).normalized()
@@ -265,6 +288,8 @@ func handle_movement(_delta):
 	if Input.is_action_pressed("jump") and not is_on_floor():
 		if mantle_ray.is_colliding() and not mantle_check_above.is_colliding():
 			start_mantle()
+			swing_pickaxe(pickaxe1, 1)
+			swing_pickaxe(pickaxe2, 2)
 
 func handle_jump_logic(delta):
 	if is_on_floor():
@@ -273,6 +298,8 @@ func handle_jump_logic(delta):
 			jump_charge = min(jump_charge + delta, max_jump_charge_time)
 		elif is_charging_jump:
 			jump_sound.play()
+			swing_pickaxe(pickaxe1, 1)
+			swing_pickaxe(pickaxe2, 2)
 			var ratio = jump_charge / max_jump_charge_time
 			velocity.y = jump_velocity * ratio
 			is_charging_jump = false
@@ -284,15 +311,10 @@ func handle_jump_logic(delta):
 
 func start_mantle():
 	is_mantling = true
-	mantle_timer = 0.0
 	play_anim("Cheer")
 	jump_sound.play()
-	velocity = Vector3(velocity.x, jump_velocity * 1.2, velocity.z)
-
-func handle_mantle(delta):
-	mantle_timer += delta
-	if mantle_timer >= mantle_duration:
-		is_mantling = false
+	velocity.y = jump_velocity * 1.2  # Mantle jump impulse
+	mantle_cooldown_timer = mantle_cooldown  # Start cooldown timer
 
 func handle_animation():
 	if is_mantling:

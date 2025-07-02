@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b1a5p4ctadrct"]
 
 [ext_resource type="Texture2D" uid="uid://6ymc11wie8rc" path="res://assets/skybox/FS002_Day_Sunless.png" id="1_hs5ns"]
-[ext_resource type="Script" uid="uid://vxllhfytrfx1" path="res://levels/sky_dome.gd" id="2_qqmc5"]
+[ext_resource type="Script" uid="uid://vxllhfytrfx1" path="res://assets/skybox/skydome1.gd" id="2_qqmc5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hs5ns"]
 panorama = ExtResource("1_hs5ns")
@@ -11,7 +11,7 @@ sky_material = SubResource("PanoramaSkyMaterial_hs5ns")
 
 [sub_resource type="Environment" id="Environment_qqmc5"]
 background_mode = 1
-background_color = Color(0, 0.643137, 1, 1)
+background_color = Color(0.665811, 0.845901, 1, 1)
 sky = SubResource("Sky_yp3po")
 fog_light_color = Color(3.27289e-06, 0.616508, 0.715248, 1)
 volumetric_fog_sky_affect = 0.2

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://duh65a7rcqqf3"
-path="res://.godot/imported/blackcappedchickadee-549875.mp3-602e95e4e47496a8a6a684c239114012.mp3str"
+path="res://.godot/imported/blackcappedchickadee-549875.mp3-2ed4780667d3039d016bb68fd16285df.mp3str"
 
 [deps]
 
-source_file="res://assets/music/Mixkit/blackcappedchickadee-549875.mp3"
-dest_files=["res://.godot/imported/blackcappedchickadee-549875.mp3-602e95e4e47496a8a6a684c239114012.mp3str"]
+source_file="res://assets/music/mixkit/blackcappedchickadee-549875.mp3"
+dest_files=["res://.godot/imported/blackcappedchickadee-549875.mp3-2ed4780667d3039d016bb68fd16285df.mp3str"]
 
 [params]
 
