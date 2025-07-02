@@ -1,8 +1,8 @@
 extends Control
 
-@onready var fullscreen_dropdown = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/FullscreenDropdown
-@onready var vsync_dropdown = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/VSyncDropdown
-@onready var max_fps_dropdown = $CanvasLayer/Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/MaxFPSDropdown
+@onready var fullscreen_dropdown = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/FullscreenDropdown
+@onready var vsync_dropdown = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/VSyncDropdown
+@onready var max_fps_dropdown = $Control/MarginContainer/VBoxContainer/HBoxContainer4/CHANGER/MaxFPSDropdown
 
 var current_save_slot := 1  # change as needed
 var fps_limits := [60, 120, 144, 240, 360]

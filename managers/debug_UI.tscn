@@ -32,16 +32,6 @@ alignment = 1
 layout_mode = 2
 text = "DEBUG MENU (F1 Toggle)"
 
-[node name="SPACE" type="Label" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-
-[node name="SceneName" type="Label" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-text = "Current Scene:"
-
-[node name="SPACE2" type="Label" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 11

@@ -14,8 +14,6 @@ func _ready():
 	debug_ui_instance = debug_ui_scene.instantiate()
 	add_child(debug_ui_instance)
 
-	# Get nodes FROM the instance, not from self
-	scene_label = debug_ui_instance.get_node("ColorRect/VBoxContainer/SceneName")
 	cpu_label = debug_ui_instance.get_node("ColorRect2/VBoxContainer/Processor")
 	gpu_label = debug_ui_instance.get_node("ColorRect2/VBoxContainer/GraphicsCard")
 	fps_label = debug_ui_instance.get_node("ColorRect2/VBoxContainer/Frames")
@@ -32,7 +30,6 @@ func _input(event):
 		debug_ui_instance.visible = visible_ui
 
 func update_debug_ui_labels():
-	scene_label.text = "Current Scene: " + get_tree().current_scene.name
 	cpu_label.text = "CPU: " + OS.get_processor_name()
 	gpu_label.text = "GPU: " + RenderingServer.get_rendering_device().get_device_name()
 	fps_label.text = "FPS: " + str(Engine.get_frames_per_second())

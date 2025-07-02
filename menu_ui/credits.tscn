@@ -1,0 +1,155 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfsv8k7gkacvc"]
+
+[ext_resource type="Script" uid="uid://badapuhi4v8ri" path="res://menu_ui/credits.gd" id="1_51mwl"]
+[ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="2_bsnw4"]
+[ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav" id="3_bsnw4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yv8x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5a2ja"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_51mwl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.5
+offset_top = -134.0
+offset_right = 246.5
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bsnw4")
+theme_override_font_sizes/font_size = 100
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bsnw4")
+theme_override_font_sizes/font_size = 20
+text = "GAME DIRECTOR: OWEN C
+VOICED BY: OWEN C
+DEVELOPER: OYEAHK STUDIOS"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bsnw4")
+theme_override_font_sizes/font_size = 20
+text = "FREE ASSETS:"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bsnw4")
+theme_override_font_sizes/font_size = 20
+text = "KAYKIT DUNGEON REMASTERED,"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bsnw4")
+theme_override_font_sizes/font_size = 20
+text = "ICE AX, LOW POLY ROCKS,"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bsnw4")
+theme_override_font_sizes/font_size = 20
+text = "ULTIMATE NATURE PACK BY QUATERNIOUS"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.5
+offset_top = -66.0
+offset_right = 106.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button3" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_bsnw4")
+theme_override_colors/font_hover_color = Color(0.494118, 0.709804, 0.882353, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0yv8x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0yv8x")
+text = "BACK"
+
+[node name="Button5" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_bsnw4")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_5a2ja")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5a2ja")
+text = "VERSION 0.2.0"
+
+[node name="button_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bsnw4")
+
+[connection signal="pressed" from="Control/VBoxContainer2/Button3" to="." method="_on_button_3_pressed"]

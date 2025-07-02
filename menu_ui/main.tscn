@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbdepwyyjqlcm"]
+[gd_scene load_steps=6 format=3 uid="uid://cbdepwyyjqlcm"]
 
 [ext_resource type="Script" uid="uid://ckvpajwmrsvb3" path="res://menu_ui/main.gd" id="1_t7737"]
 [ext_resource type="Theme" uid="uid://dy58d31fw2wn8" path="res://themes/text_normal.tres" id="2_y2pfb"]
-[ext_resource type="PackedScene" uid="uid://hff721kp5mqc" path="res://levels/menuMap/menuMap.tscn" id="4_5m2xm"]
 [ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav" id="4_jh0yp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03q7c"]
@@ -20,18 +19,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t7737")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_t7737")
+color = Color(0.25098, 0.25098, 0.25098, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -46,21 +51,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_y2pfb")
-theme_override_font_sizes/font_size = 100
-text = "SKYJUMP KINGDOM"
+theme_override_font_sizes/font_size = 240
+text = "ijump"
 horizontal_alignment = 1
 
-[node name="Button1" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Button1" type="Button" parent="Control/VBoxContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_y2pfb")
 theme_override_colors/font_hover_color = Color(0.493195, 0.709854, 0.883462, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_styles/focus = SubResource("StyleBoxFlat_03q7c")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_03q7c")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_03q7c")
@@ -75,14 +80,14 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_03q7c")
 text = "PLAY"
 icon_alignment = 1
 
-[node name="Button2" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Button2" type="Button" parent="Control/VBoxContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_y2pfb")
 theme_override_colors/font_hover_color = Color(0.493195, 0.709854, 0.883462, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_styles/focus = SubResource("StyleBoxFlat_03q7c")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_03q7c")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_03q7c")
@@ -97,13 +102,13 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_03q7c")
 text = "SETTINGS"
 icon_alignment = 1
 
-[node name="Button3" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Button3" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_y2pfb")
 theme_override_colors/font_hover_color = Color(0.494118, 0.709804, 0.882353, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_styles/focus = SubResource("StyleBoxFlat_jh0yp")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_jh0yp")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_jh0yp")
@@ -117,31 +122,67 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_jh0yp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jh0yp")
 text = "QUIT"
 
-[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 335.0
+offset_left = -106.5
+offset_top = -46.0
+offset_right = 106.5
+grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("2_y2pfb")
-theme_override_font_sizes/font_size = 35
-text = "version 0.0.1"
-horizontal_alignment = 1
 
-[node name="button_sound" type="AudioStreamPlayer" parent="CanvasLayer/Control"]
+[node name="Button4" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y2pfb")
+theme_override_colors/font_hover_color = Color(0.494118, 0.709804, 0.882353, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jh0yp")
+text = "CREDITS"
+
+[node name="Button5" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y2pfb")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_jh0yp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jh0yp")
+text = "VERSION 0.2.0"
+
+[node name="button_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jh0yp")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="MenuMap" parent="CanvasLayer2" instance=ExtResource("4_5m2xm")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.642787, 0.198267, 0.739942, 0, 0.965926, -0.258819, -0.766044, 0.166366, 0.620885, 35, 4, 25)
-current = true
-
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Button1" to="CanvasLayer/Control" method="_on_button_1_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Button2" to="CanvasLayer/Control" method="_on_button_2_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Button3" to="CanvasLayer/Control" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button1" to="Control" method="_on_button_1_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button2" to="Control" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button3" to="Control" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/Button4" to="." method="_on_button_4_pressed"]
