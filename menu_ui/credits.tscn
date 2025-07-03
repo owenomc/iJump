@@ -26,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.25098, 0.25098, 0.25098, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -66,6 +66,9 @@ text = "GAME DIRECTOR: OWEN C
 VOICED BY: OWEN C
 DEVELOPER: OYEAHK STUDIOS"
 horizontal_alignment = 1
+
+[node name="SPACE" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
 
 [node name="Label3" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -112,7 +115,7 @@ grow_vertical = 0
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_bsnw4")
-theme_override_colors/font_hover_color = Color(0.494118, 0.709804, 0.882353, 1)
+theme_override_colors/font_hover_color = Color(0.745098, 0.364706, 0.372549, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 40
@@ -129,7 +132,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0yv8x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0yv8x")
 text = "BACK"
 
-[node name="Button5" type="Button" parent="Control/VBoxContainer2"]
+[node name="ButtonGameVersion" type="Button" parent="Control/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_bsnw4")

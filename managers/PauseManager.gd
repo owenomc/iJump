@@ -8,8 +8,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event: InputEvent) -> void:
-	if get_tree().current_scene.scene_file_path == "res://menu_ui/main.tscn":
-		return  # Don't allow pause in main menu
 	if event.is_action_pressed("paused"):
 		toggle_pause()
 

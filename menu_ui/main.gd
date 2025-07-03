@@ -14,6 +14,7 @@ func _on_button_1_pressed() -> void:
 	await timer.timeout
 	print("Pressed Play")
 	get_tree().change_scene_to_file("res://levels/map/Map.tscn")
+	PauseManager.resume_game()
 
 func _on_button_2_pressed() -> void:
 	$button_sound.play()

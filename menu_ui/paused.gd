@@ -1,7 +1,6 @@
 extends Control
 
 func _on_button_main_pressed() -> void:
-	queue_free()
 	get_tree().change_scene_to_file("res://menu_ui/main.tscn")
 
 func _on_resume_button_pressed() -> void:

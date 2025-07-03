@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3ys0li3lvpuk"]
+[gd_scene load_steps=14 format=3 uid="uid://c3ys0li3lvpuk"]
 
 [ext_resource type="ArrayMesh" uid="uid://kachjw2k38l0" path="res://assets/gameObjects/KayKit_DungeonRemastered_1.1_FREE/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/ceiling_tile.obj" id="6_7rfpw"]
+[ext_resource type="PackedScene" uid="uid://b78kdjafv1dxx" path="res://NPCs/bubbles.tscn" id="7_2aabv"]
 [ext_resource type="ArrayMesh" uid="uid://bl0ukg54q635r" path="res://assets/gameObjects/KayKit_DungeonRemastered_1.1_FREE/KayKit_DungeonRemastered_1.1_FREE/Assets/obj/floor_dirt_large.obj" id="11_lhelv"]
 [ext_resource type="PackedScene" uid="uid://bvn1lds5p0n1y" path="res://assets/gameObjects/rocks/rock1/rock1.tscn" id="17_utfvq"]
 [ext_resource type="PackedScene" uid="uid://clbgtmw5p4vwd" path="res://assets/gameObjects/rocks/rock1/rock2.tscn" id="18_6agup"]
@@ -213,3 +214,6 @@ mesh = ExtResource("6_7rfpw")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="CeilingTile11/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_jll72")
+
+[node name="Bubbles" parent="." instance=ExtResource("7_2aabv")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)

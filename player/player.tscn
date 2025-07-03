@@ -6,34 +6,22 @@
 [ext_resource type="AudioStream" uid="uid://cuebf5ffmk1af" path="res://assets/music/mixkit/mixkit-cool-interface-click-tone-2568.wav" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://b4a4aa3xn8vvp" path="res://assets/gameObjects/flashlight/flashlight.tscn" id="5_qjkh3"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qjkh3"]
-radius = 0.2
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_g6k8r"]
-radius = 0.2
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1dw6"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yw30f"]
 bg_color = Color(0.745098, 0.364706, 0.372549, 1)
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qjkh3"]
+radius = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g6k8r"]
+radius = 0.2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkbax"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_yw30f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.330794, -0.943703, 0, 0.943703, 0.330794, -0.5, 1.3, 0.5)
-visible = false
-mesh = SubResource("CapsuleMesh_qjkh3")
-skeleton = NodePath("")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.330794, -0.943703, 0, 0.943703, 0.330794, 0.5, 1.3, 0.5)
-visible = false
-mesh = SubResource("CapsuleMesh_g6k8r")
-skeleton = NodePath("")
 
 [node name="PlayerUI" type="Control" parent="."]
 layout_mode = 3
@@ -62,6 +50,31 @@ theme_override_styles/background = SubResource("StyleBoxFlat_g1dw6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yw30f")
 max_value = 0.8
 
+[node name="TimerLabel" type="Label" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_right = 42.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("3_qjkh3")
+theme_override_font_sizes/font_size = 20
+text = "00:00"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.330794, -0.943703, 0, 0.943703, 0.330794, -0.5, 1.3, 0.5)
+visible = false
+mesh = SubResource("CapsuleMesh_qjkh3")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.330794, -0.943703, 0, 0.943703, 0.330794, 0.5, 1.3, 0.5)
+visible = false
+mesh = SubResource("CapsuleMesh_g6k8r")
+skeleton = NodePath("")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rkbax")
@@ -87,3 +100,5 @@ visible = false
 stream = ExtResource("4_yw30f")
 
 [node name="MantleTimer" type="Timer" parent="."]
+
+[node name="GameTimer" type="Timer" parent="."]
